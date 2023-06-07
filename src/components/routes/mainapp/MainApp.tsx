@@ -1,6 +1,7 @@
-import { createStyles, Table, Progress, Anchor, Text, Group, ScrollArea, rem, Box } from '@mantine/core';
+import { createStyles, Table, Progress, Anchor, Text, Group, ScrollArea, rem, Box, Flex, Grid, SimpleGrid } from '@mantine/core';
 import AppCards from './AppCards';
-import { bullshitArr } from './AppCards';
+import { bullshitArr6, facebook, gmail, instagram, twitter, whatssap } from './data';
+import Container from 'react-bootstrap/Container';
 
 const useStyles = createStyles((theme) => ({
   progressBar: {
@@ -73,9 +74,33 @@ function MainApp({ data }: TableReviewsProps) {
 
   return (
     <ScrollArea>
-      <Box w='30vw'>
-      <AppCards {...bullshitArr}/>
-      </Box>
+          <SimpleGrid
+      cols={4}
+      spacing="lg"
+      breakpoints={[
+        { maxWidth: 'md', cols: 3, spacing: 'md' },
+        { maxWidth: 'sm', cols: 2, spacing: 'sm' },
+        { maxWidth: 'xs', cols: 1, spacing: 'sm' },
+      ]}
+    >
+       <div><AppCards {...facebook}/></div>
+      <div><AppCards {...twitter}/></div>
+      <div><AppCards {...gmail}/></div>
+      
+      </SimpleGrid>
+      <SimpleGrid
+      cols={4}
+      spacing="lg"
+      breakpoints={[
+        { maxWidth: 'md', cols: 3, spacing: 'md' },
+        { maxWidth: 'sm', cols: 2, spacing: 'sm' },
+        { maxWidth: 'xs', cols: 1, spacing: 'sm' },
+      ]}
+    >
+    <div><AppCards {...facebook}/></div>
+      <div><AppCards {...twitter}/></div>
+      <div><AppCards {...gmail}/></div>
+      </SimpleGrid>
       <Table sx={{ minWidth: 800 }} verticalSpacing="xs">
         <thead>
           <tr>

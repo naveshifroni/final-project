@@ -108,7 +108,7 @@ export function Home() {
               className={classes.control}
               mt={40}
             >
-              Go To The App
+              Go to the app
             </Button>
           </div>
         </div>

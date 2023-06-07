@@ -35,17 +35,6 @@ interface SwitchesCardProps {
   }[];
 }
 
-export const bullshitArr = {
-  title: "holy",
-  description: "mountain",
-  data: [{ title: "holy", description: "mountain" },
-  {title:'holy', description: 'mountain'},
-  {title:'holy', description: 'mountain'},
-  {title:'holy', description: 'mountain'},
-  {title:'holy', description: 'mountain'},
-  {title:'holy', description: 'mountain'},
-  {title:'holy', description: 'mountain'}],
-};
 
 function AppCards({ title, description, data }: SwitchesCardProps) {
   const { classes } = useStyles();
@@ -68,7 +57,7 @@ function AppCards({ title, description, data }: SwitchesCardProps) {
   ));
 
   return (
-    <Card withBorder radius="md" p="xl" className={classes.card}>
+    <Card m='md' withBorder radius="md" p="xl" className={classes.card}>
       <Text fz="lg" className={classes.title} fw={500}>
         {title}
       </Text>
