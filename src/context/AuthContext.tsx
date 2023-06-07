@@ -10,16 +10,24 @@ const initialState: AuthContextType = {
 const AuthContext = createContext<AuthContextType>(initialState);
 
 const AuthContextProvider = ({ children }: ChildProps) => {
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user") ?? "");
-    // TODO check if it's not empty
-    const token = user.token;
-    const email = user.email;
-    const username = user.username;
+   useEffect(() => {
+    const userFromStorage =localStorage.getItem("user") ?? ''
+    if (userFromStorage ===''){
+      console.log('helooooo')
+    }
+    else{
+      const user = JSON.parse(userFromStorage);
 
-    login(username, email, token);
+      // TODO check if it's not empty
+      const token = user.token;
+      const email = user.email;
+      const username = user.username;
+  
+      login(username, email, token);
+    }
+  
   }, []);
-
+ 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState<string | undefined>(undefined);
   const [email, setEmail] = useState<string | undefined>(undefined);
