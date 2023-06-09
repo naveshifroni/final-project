@@ -27,7 +27,7 @@ const useStyles = createStyles((theme) => ({
     },
   },
 
-  content: {
+/*   content: {
     paddingTop: `calc(${theme.spacing.xl} * 2)`,
     paddingBottom: `calc(${theme.spacing.xl} * 2)`,
     marginRight: `calc(${theme.spacing.xl} * 3)`,
@@ -36,7 +36,7 @@ const useStyles = createStyles((theme) => ({
       marginRight: 0,
     },
   },
-
+ */
   title: {
     color: theme.white,
     fontFamily: `Greycliff CF, ${theme.fontFamily}`,
@@ -81,7 +81,7 @@ export function Home() {
     <div className={classes.root}>
       <Container size="lg">
         <div className={classes.inner}>
-          <div className={classes.content}>
+          <div /* className={classes.content} */>
             <Title className={classes.title}>
               Connet{' '}
               <Text
@@ -97,7 +97,7 @@ export function Home() {
 
             <Text className={classes.description} mt={30}>
               Connet to your web applications with ease – GotoApp includes more
-              than 100 apps to conect to at ant moment
+              than 100 apps to conect to and chat at any moment
             </Text>
 
             <Button

@@ -141,7 +141,7 @@ export function MainHeader({ mainLinks, userLinks }: DoubleHeaderProps) {
   ));
 
   return (
-    <Header height={HEADER_HEIGHT} mb={120} className={classes.header}>
+    <Header height={HEADER_HEIGHT} mb={15} className={classes.header}>
       <Container className={classes.inner}>
         <div style={{ color: '#fff' }}>
           <NavLink to={'/'}>

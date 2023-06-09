@@ -19,6 +19,12 @@ const login = (email: string, password: string) => {
   });
 };
 
+const updateAppSettings = (app: any) => {
+  return axios.post(baseUrl + "/app", { app }).then((res)=> {
+    return res
+  })
+};
+
 const logout = () => {
   localStorage.removeItem("token");
 };
