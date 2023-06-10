@@ -5,14 +5,14 @@ import { RegisterFormType } from "../../types";
 import * as Yup from "yup";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { ColorRing } from "react-loader-spinner";
-import authService from "../../services/auth.service";
+import authService, { login } from "../../services/auth.service";
 import { Box, Button, Flex, Grid } from "@mantine/core";
 
 const Register = () => {
   const nav = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [err, setErr] = useState<string | undefined>(undefined);
-  const { isLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn, login } = useContext(AuthContext);
 
   const initialValues: RegisterFormType = {
     username: "",
@@ -33,6 +33,10 @@ const Register = () => {
       .register(username, email, password)
       .then((res) => {
         console.log(res);
+        const token = res.accessToken;
+        const email = res.email;
+        const username = res.username;
+        login(username, email, token);
         nav("/");
       })
       .catch((e) => {

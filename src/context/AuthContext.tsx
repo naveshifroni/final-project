@@ -16,6 +16,7 @@ const AuthContextProvider = ({ children }: ChildProps) => {
     const userFromStorage = localStorage.getItem("user") ?? "";
     if (userFromStorage === "") {
       console.log("hi");
+      logout();
     } else {
       const user = JSON.parse(userFromStorage);
 
