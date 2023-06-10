@@ -1,9 +1,24 @@
 import axios from "axios";
+import { appSettingsType } from "../types";
 
 const baseUrl = "http://localhost:3001/api/auth";
 
 const register = (username: string, email: string, password: string) => {
-  return axios.post(baseUrl + "/signup", { username, email, password });
+  return axios
+    .post(baseUrl + "/signup", { username, email, password })
+    .then((res) => {
+      const token = res.data.accessToken;
+      const email = res.data.email;
+      const username = res.data.username;
+      if (token) {
+        localStorage.setItem("token", token);
+        localStorage.setItem(
+          "user",
+          JSON.stringify({ email, username, token })
+        );
+      }
+      return res.data;
+    });
 };
 
 const login = (email: string, password: string) => {
@@ -19,17 +34,18 @@ const login = (email: string, password: string) => {
   });
 };
 
-const updateAppSettings = (app: any) => {
-  return axios.post(baseUrl + "/app", { app }).then((res)=> {
-    return res
-  })
+const updateAppSettings = (app: appSettingsType) => {
+  return axios.post(baseUrl + "/app", { app }).then((res) => {
+    return res;
+  });
 };
 
 const logout = () => {
   localStorage.removeItem("token");
+  localStorage.removeItem("user");
 };
 
-export { register, login, logout };
+export { register, login, logout, updateAppSettings };
 
 const authService = { register, login, logout };
 export default authService;

@@ -6,6 +6,7 @@ import * as Yup from "yup";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { ColorRing } from "react-loader-spinner";
 import authService from "../../services/auth.service";
+import { Box } from "@mantine/core";
 
 const Login = () => {
   const nav = useNavigate();
@@ -52,59 +53,62 @@ const Login = () => {
     return <Navigate to="/" />;
   }
   return (
-    <div>
-      {err && <div>{err} </div>}
-      {isLoading && <ColorRing />}
-      <Formik
-        initialValues={initialValues}
-        onSubmit={handleLogin}
-        validationSchema={validationSchema}
-      >
-        <Form>
-          <div className="w-50 mx-auto">
-            <label htmlFor="email" className="form-label">
-              Email
-            </label>
-            <Field
-              name="email"
-              type="email"
-              className="form-control"
-              id="email"
-            />
-            <ErrorMessage
-              name="email"
-              component="div"
-              className="alert alert-danger"
-            />
-          </div>
-          <div className="w-50 mx-auto">
-            <label htmlFor="password" className="form-label">
-              Password
-            </label>
-            <Field
-              name="password"
-              type="password"
-              className="form-control"
-              id="password"
-            />
-            <ErrorMessage
-              name="password"
-              component="div"
-              className="alert alert-danger"
-            />
-          </div>
-          <div className="col-12">
-            <button
-              disabled={isLoading}
-              className="btn btn-primary"
-              type="submit"
-            >
-              Login
-            </button>
-          </div>
-        </Form>
-      </Formik>
-    </div>
+    <Box ta="center" h="100vh" pt="5vw" sx={{ backgroundColor: "#f3f3f3" }}>
+      <Box mb="50px"> GoToApp </Box>
+      <div>
+        {err && <div>{err} </div>}
+        {isLoading && <ColorRing />}
+        <Formik
+          initialValues={initialValues}
+          onSubmit={handleLogin}
+          validationSchema={validationSchema}
+        >
+          <Form>
+            <div className="w-50 mx-auto">
+              <label htmlFor="email" className="form-label">
+                Email
+              </label>
+              <Field
+                name="email"
+                type="email"
+                className="form-control"
+                id="email"
+              />
+              <ErrorMessage
+                name="email"
+                component="div"
+                className="alert alert-danger"
+              />
+            </div>
+            <div className="w-50 mx-auto">
+              <label htmlFor="password" className="form-label">
+                Password
+              </label>
+              <Field
+                name="password"
+                type="password"
+                className="form-control"
+                id="password"
+              />
+              <ErrorMessage
+                name="password"
+                component="div"
+                className="alert alert-danger"
+              />
+            </div>
+            <div className="col-12 justify-content-center d-flex text-center mt-4">
+              <button
+                disabled={isLoading}
+                className="btn btn-primary"
+                type="submit"
+              >
+                Login
+              </button>
+            </div>
+          </Form>
+        </Formik>
+      </div>
+    </Box>
   );
 };
 

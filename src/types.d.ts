@@ -26,3 +26,12 @@ export type LoginFormType = {
   email: string;
   password: string;
 };
+
+export type appSettingsType = {
+  title: string;
+  notifications: boolean;
+  inbox: boolean;
+  publish: boolean;
+  following: boolean;
+  followers: boolean;
+};

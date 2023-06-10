@@ -27,6 +27,8 @@ import {
   IconBrandLinkedin,
 } from "@tabler/icons-react";
 import { useState } from "react";
+import { updateAppSettings } from "../../../services/auth.service";
+import { appSettingsType } from "../../../types";
 
 const mockdata = [
   { title: "Facebook", icon: IconBrandFacebook, color: "blue" },
@@ -83,13 +85,33 @@ function MainApp3() {
   const [noti, setNoti] = useState(false);
   const [inbox, setInbox] = useState(false);
   const [publish, setPublish] = useState(false);
-  const [folowing, setFollowing] = useState(false);
+  const [following, setFollowing] = useState(false);
   const [followers, setFollowers] = useState(false);
 
   const openSesemi = (item: any) => {
     console.log(item.title);
     setApp(item);
     open();
+  };
+
+  const saveAppSettings = () => {
+    const item: appSettingsType = {
+      title: "",
+      notifications: false,
+      inbox: false,
+      publish: false,
+      following: false,
+      followers: false,
+    };
+    item.title = app.title;
+    item.notifications = noti;
+    item.inbox = inbox;
+    item.publish = publish;
+    item.following = following;
+    item.followers = followers;
+    updateAppSettings(item)
+      .then((res) => console.log(res))
+      .catch((e) => console.log(e));
   };
 
   const items = mockdata.map((item) => (
@@ -154,7 +176,7 @@ function MainApp3() {
             <Flex justify="space-around" mb="xl">
               <Text w="150px"> Top 5 following </Text>
               <Switch
-                checked={folowing}
+                checked={following}
                 onChange={(event) => setFollowing(event.currentTarget.checked)}
               />
             </Flex>
@@ -166,7 +188,7 @@ function MainApp3() {
               />
             </Flex>
             <Grid justify="center" mt="lg">
-              <Button> Save </Button>
+              <Button onClick={saveAppSettings}> Save </Button>
             </Grid>
           </Box>
         </Card>

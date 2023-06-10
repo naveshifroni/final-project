@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { AuthContextType, ChildProps } from "../types";
+import { useNavigate } from "react-router-dom";
 
 const initialState: AuthContextType = {
   isLoggedIn: false,
@@ -10,10 +11,11 @@ const initialState: AuthContextType = {
 const AuthContext = createContext<AuthContextType>(initialState);
 
 const AuthContextProvider = ({ children }: ChildProps) => {
+  const nav = useNavigate();
   useEffect(() => {
     const userFromStorage = localStorage.getItem("user") ?? "";
     if (userFromStorage === "") {
-      console.log("helooooo");
+      console.log("hi");
     } else {
       const user = JSON.parse(userFromStorage);
 

@@ -6,6 +6,7 @@ import * as Yup from "yup";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { ColorRing } from "react-loader-spinner";
 import authService from "../../services/auth.service";
+import { Box, Button, Flex, Grid } from "@mantine/core";
 
 const Register = () => {
   const nav = useNavigate();
@@ -47,75 +48,86 @@ const Register = () => {
     return <Navigate to="/" />;
   }
   return (
-    <div>
-      {err && <div>{err} </div>}
-      {isLoading && <ColorRing />}
-      <Formik
-        initialValues={initialValues}
-        onSubmit={handleRegister}
-        validationSchema={validationSchema}
-      >
-        <Form>
-          <div className="w-50 mx-auto">
-            <label htmlFor="username" className="form-label">
-              User Name
-            </label>
-            <Field
-              name="username"
-              type="text"
-              className="form-control"
-              id="username"
-            />
-            <ErrorMessage
-              name="username"
-              component="div"
-              className="alert alert-danger"
-            />
-          </div>
-          <div className="w-50 mx-auto">
-            <label htmlFor="email" className="form-label">
-              Email
-            </label>
-            <Field
-              name="email"
-              type="email"
-              className="form-control"
-              id="email"
-            />
-            <ErrorMessage
-              name="email"
-              component="div"
-              className="alert alert-danger"
-            />
-          </div>
-          <div className="w-50 mx-auto">
-            <label htmlFor="password" className="form-label">
-              Password
-            </label>
-            <Field
-              name="password"
-              type="password"
-              className="form-control"
-              id="password"
-            />
-            <ErrorMessage
-              name="password"
-              component="div"
-              className="alert alert-danger"
-            />
-          </div>
-          <div className="col-12">
-            <button
-              disabled={isLoading}
-              className="btn btn-primary"
-              type="submit"
-            >
-              Register
-            </button>
-          </div>
-        </Form>
-      </Formik>
-    </div>
+    <Box ta="center" h="100vh" pt="5vw" sx={{ backgroundColor: "#f3f3f3" }}>
+      <Box mb="30px"> GoToApp </Box>
+      <div>
+        {err && <div>{err} </div>}
+        {isLoading && <ColorRing />}
+        <Formik
+          initialValues={initialValues}
+          onSubmit={handleRegister}
+          validationSchema={validationSchema}
+        >
+          <Form>
+            <div className="w-50 mx-auto">
+              <label htmlFor="username" className="form-label">
+                User Name
+              </label>
+              <Field
+                name="username"
+                type="text"
+                className="form-control"
+                id="username"
+              />
+              <ErrorMessage
+                name="username"
+                component="div"
+                className="alert alert-danger"
+              />
+            </div>
+            <div className="w-50 mx-auto">
+              <label htmlFor="email" className="form-label">
+                Email
+              </label>
+              <Field
+                name="email"
+                type="email"
+                className="form-control"
+                id="email"
+              />
+              <ErrorMessage
+                name="email"
+                component="div"
+                className="alert alert-danger"
+              />
+            </div>
+            <div className="w-50 mx-auto">
+              <label htmlFor="password" className="form-label">
+                Password
+              </label>
+              <Field
+                name="password"
+                type="password"
+                className="form-control"
+                id="password"
+              />
+              <ErrorMessage
+                name="password"
+                component="div"
+                className="alert alert-danger"
+              />
+            </div>
+            <Grid justify="center" mt="20px">
+              <Grid.Col span={12} sx={{ textAlign: "center" }}>
+                <button
+                  disabled={isLoading}
+                  className="btn btn-primary w-25 text-center"
+                  type="submit"
+                >
+                  Register
+                </button>
+              </Grid.Col>
+              <Grid.Col span={12} sx={{ textAlign: "center" }}>
+                <Box>
+                  {" "}
+                  already a member? <a href="/login">log in</a>
+                </Box>
+              </Grid.Col>
+            </Grid>
+          </Form>
+        </Formik>
+      </div>
+    </Box>
   );
 };
 
