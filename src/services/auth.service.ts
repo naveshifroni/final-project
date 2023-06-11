@@ -46,12 +46,24 @@ const updateAppSettings = (app: appSettingsType) => {
   });
 };
 
+const addApps = (apps: any, appsId: string) => {
+  return axios.post(baseUrl + "/add", { apps, appsId }).then((res) => {
+    return res;
+  });
+};
+
+const getChosenApps = () => {
+  return axios.get(baseUrl + "/add").then((res) => {
+    return res;
+  });
+};
+
 const logout = () => {
   localStorage.removeItem("token");
   localStorage.removeItem("user");
 };
 
-export { register, login, logout, updateAppSettings };
+export { register, login, logout, updateAppSettings, addApps, getChosenApps };
 
 const authService = { register, login, logout };
 export default authService;

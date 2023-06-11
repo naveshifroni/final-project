@@ -18,6 +18,7 @@ import { IconLogout } from "@tabler/icons-react";
 import { AuthContextProvider } from "../context/AuthContext";
 import authService from "../services/auth.service";
 import AuthContext from "../context/AuthContext";
+import logo from "../images/logo2.png";
 
 const HEADER_HEIGHT = rem(84);
 
@@ -118,11 +119,13 @@ export const mainlinks: LinkProps[] = [
   { label: "Home", link: "/home" },
   { label: "About", link: "/about" },
   { label: "App", link: "/mainapp" },
+  { label: "Shop", link: "/shop" },
 ];
 export const userLinks: LinkProps[] = [
   { label: "Home", link: "/home" },
   { label: "About", link: "/about" },
   { label: "App", link: "/mainapp" },
+  { label: "Shop", link: "/shop" },
 ];
 
 export function MainHeader({ mainLinks, userLinks }: DoubleHeaderProps) {
@@ -173,9 +176,12 @@ export function MainHeader({ mainLinks, userLinks }: DoubleHeaderProps) {
       <Container className={classes.inner}>
         <div style={{ color: "#fff" }}>
           <NavLink to={"/"}>
-            <Text color="#fff" fz="24px" variant="outline">
-              GoToApp
-            </Text>
+            <Flex>
+              <img sizes="5px" src={logo} alt="Logo" />
+              <Text ml="md" color="#fff" fz="24px" variant="outline">
+                GoToApp
+              </Text>
+            </Flex>
           </NavLink>
         </div>
 

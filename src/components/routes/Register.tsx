@@ -6,7 +6,7 @@ import * as Yup from "yup";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { ColorRing } from "react-loader-spinner";
 import authService, { login } from "../../services/auth.service";
-import { Box, Button, Flex, Grid } from "@mantine/core";
+import { Box, Text, Flex, Grid } from "@mantine/core";
 
 const Register = () => {
   const nav = useNavigate();
@@ -55,7 +55,12 @@ const Register = () => {
     <Box ta="center" h="100vh" pt="5vw" sx={{ backgroundColor: "#f3f3f3" }}>
       <Box mb="30px"> GoToApp </Box>
       <div>
-        {err && <div>{err} </div>}
+        {err && (
+          <Text color="red" mb="lg">
+            {" "}
+            Some of the details are not valid{" "}
+          </Text>
+        )}
         {isLoading && <ColorRing />}
         <Formik
           initialValues={initialValues}

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { About } from "./components/routes/About";
+import About from "./components/routes/About";
 import Login from "./components/routes/Login";
 import Register from "./components/routes/Register";
 import Home from "./components/routes/Home";
@@ -9,6 +9,7 @@ import AuthContext from "./context/AuthContext";
 import { MainHeader, userLinks, mainlinks } from "./components/MainHeader";
 import { MainFooter, data } from "./components/MainFooter";
 import MainApp3 from "./components/routes/mainapp/MainApp3";
+import Shop from "./components/routes/Shop";
 
 function App() {
   const { isLoggedIn } = useContext(AuthContext);
@@ -22,11 +23,13 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
             <Route path="/about" element={<About />} />
+            <Route path="/shop" element={<Shop />} />
             <Route path="/mainapp" element={<MainApp3 />} />{" "}
           </>
         )}
         {!isLoggedIn && <Route path="/login" element={<Login />} />}
         {!isLoggedIn && <Route path="/register" element={<Register />} />}
+        {!isLoggedIn && <Route path="/" element={<Register />} />}
       </Routes>
       {isLoggedIn && <MainFooter data={data} />}
     </>
