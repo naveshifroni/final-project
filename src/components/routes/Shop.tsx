@@ -93,10 +93,12 @@ function Shop() {
       chosenApps.push(name);
       setChosenApps(chosenApps);
       console.log(chosenApps);
+      navigate("/shop");
     } else {
       chosenApps.splice(chosenIndex, 1);
       setChosenApps(chosenApps);
       console.log(chosenApps);
+      navigate("/shop");
     }
   };
   const checkout = () => {
