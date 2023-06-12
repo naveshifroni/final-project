@@ -39,8 +39,8 @@ const Register = () => {
           const token = res.accessToken;
           const email = res.email;
           const username = res.username;
-          const roleOfUser = res.roleId ?? "";
-          if (roleOfUser === "6475ae11f3de28d36990efcd") {
+
+          if (role === "admin") {
             login(username, email, token, true);
           } else {
             login(username, email, token, false);

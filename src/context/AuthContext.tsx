@@ -14,10 +14,10 @@ const AuthContext = createContext<AuthContextType>(initialState);
 const AuthContextProvider = ({ children }: ChildProps) => {
   const nav = useNavigate();
   useEffect(() => {
-    const isAdmin = localStorage.getItem("admin") ?? "";
+    /*    const isAdmin = localStorage.getItem("admin") ?? "";
     if (isAdmin === "") {
       setAdmin(false);
-    }
+    } */
     const userFromStorage = localStorage.getItem("user") ?? "";
     if (userFromStorage === "") {
       logout();
