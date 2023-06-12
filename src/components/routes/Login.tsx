@@ -6,7 +6,8 @@ import * as Yup from "yup";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { ColorRing } from "react-loader-spinner";
 import authService from "../../services/auth.service";
-import { Box } from "@mantine/core";
+import { Box, Text } from "@mantine/core";
+import logo from "./../../images/logo.png";
 
 const Login = () => {
   const nav = useNavigate();
@@ -58,7 +59,11 @@ const Login = () => {
   }
   return (
     <Box ta="center" h="100vh" pt="5vw" sx={{ backgroundColor: "#f3f3f3" }}>
-      <Box mb="50px"> GoToApp </Box>
+      <Box mb="50px">
+        {" "}
+        <Text fz="25px">GoToApp</Text>{" "}
+        <img src={logo} alt="Logo" height="33px" />{" "}
+      </Box>
       <div>
         {err && <div>{err} </div>}
         {isLoading && <ColorRing />}

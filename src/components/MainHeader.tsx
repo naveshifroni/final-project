@@ -8,14 +8,14 @@ import {
   Burger,
   rem,
   Text,
-  Button,
   UnstyledButton,
   Flex,
+  Box,
+  Button,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { NavLink, useNavigate } from "react-router-dom";
 import { IconLogout } from "@tabler/icons-react";
-import { AuthContextProvider } from "../context/AuthContext";
 import authService from "../services/auth.service";
 import AuthContext from "../context/AuthContext";
 import logo from "../images/logo2.png";
@@ -129,7 +129,7 @@ export const userLinks: LinkProps[] = [
 ];
 
 export function MainHeader({ mainLinks, userLinks }: DoubleHeaderProps) {
-  const { isLoggedIn, logout, admin } = useContext(AuthContext);
+  const { logout, admin } = useContext(AuthContext);
   const [opened, { toggle }] = useDisclosure(false);
   const { classes, cx } = useStyles();
   const [active, setActive] = useState(0);
@@ -202,6 +202,40 @@ export function MainHeader({ mainLinks, userLinks }: DoubleHeaderProps) {
           size="sm"
           color="#fff"
         />
+        {opened && (
+          <Box mt={10}>
+            <UnstyledButton
+              onClick={() => {
+                nav("/");
+              }}
+            >
+              <Text>Home</Text>
+            </UnstyledButton>
+            <UnstyledButton
+              onClick={() => {
+                nav("/about");
+              }}
+            >
+              <Text>About</Text>
+            </UnstyledButton>
+            {admin && (
+              <UnstyledButton
+                onClick={() => {
+                  nav("/mainapp");
+                }}
+              >
+                <Text>App</Text>
+              </UnstyledButton>
+            )}
+            <UnstyledButton
+              onClick={() => {
+                nav("/shop");
+              }}
+            >
+              <Text>shop</Text>
+            </UnstyledButton>
+          </Box>
+        )}
         <UnstyledButton onClick={signOut}>
           <IconLogout />
         </UnstyledButton>

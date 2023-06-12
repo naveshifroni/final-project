@@ -8,6 +8,7 @@ import { ColorRing } from "react-loader-spinner";
 import authService from "../../services/auth.service";
 import { Box, Text, Grid, Select } from "@mantine/core";
 import Swal from "sweetalert2";
+import logo from "./../../images/logo.png";
 
 const Register = () => {
   const nav = useNavigate();
@@ -63,7 +64,11 @@ const Register = () => {
   }
   return (
     <Box ta="center" h="100vh" pt="5vw" sx={{ backgroundColor: "#f3f3f3" }}>
-      <Box mb="30px"> GoToApp </Box>
+      <Box mb="30px">
+        {" "}
+        <Text fz="25px">GoToApp</Text>{" "}
+        <img src={logo} alt="Logo" height="33px" />
+      </Box>
       <div>
         {err && (
           <Text color="red" mb="lg">
