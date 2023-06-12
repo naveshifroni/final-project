@@ -34,6 +34,14 @@ const login = (email: string, password: string) => {
       const token = res.data.accessToken;
       const email = res.data.email;
       const username = res.data.username;
+      const role = res.data.roles[0];
+
+      if (role === "ROLE_ADMIN") {
+        localStorage.setItem("admin", "yes");
+      }
+      if (role !== "ROLE_ADMIN") {
+        localStorage.removeItem("admin");
+      }
       if (token) {
         localStorage.setItem("token", token);
         localStorage.setItem(

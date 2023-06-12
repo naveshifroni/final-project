@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const initialState: AuthContextType = {
   isLoggedIn: false,
+  admin: true,
   login(username, email, token) {},
   logout() {},
 };
@@ -26,9 +27,14 @@ const AuthContextProvider = ({ children }: ChildProps) => {
 
       login(username, email, token);
     }
+    const isAdmin = localStorage.getItem("admin") ?? "";
+    if (isAdmin === "") {
+      setAdmin(false);
+    }
   }, []);
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [admin, setAdmin] = useState(true);
   const [userName, setUserName] = useState<string | undefined>(undefined);
   const [email, setEmail] = useState<string | undefined>(undefined);
   const [token, setToken] = useState<string | undefined>(undefined);
@@ -49,6 +55,7 @@ const AuthContextProvider = ({ children }: ChildProps) => {
 
   const contextValues = {
     isLoggedIn,
+    admin,
     userName,
     token,
     email,

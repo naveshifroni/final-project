@@ -34,6 +34,7 @@ const Login = () => {
         const token = res.accessToken;
         const email = res.email;
         const username = res.username;
+
         login(username, email, token);
         //update context
 

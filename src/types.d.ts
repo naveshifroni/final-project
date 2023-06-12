@@ -9,6 +9,7 @@ export type ChildProps = {
 
 export type AuthContextType = {
   isLoggedIn: boolean;
+  admin: boolean;
   username?: string;
   email?: string;
   token?: string;

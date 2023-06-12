@@ -12,7 +12,7 @@ import MainApp3 from "./components/routes/mainapp/MainApp3";
 import Shop from "./components/routes/Shop";
 
 function App() {
-  const { isLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn, admin } = useContext(AuthContext);
 
   return (
     <>
@@ -24,9 +24,9 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/shop" element={<Shop />} />
-            <Route path="/mainapp" element={<MainApp3 />} />{" "}
           </>
         )}
+        {admin && <Route path="/mainapp" element={<MainApp3 />} />}
         {!isLoggedIn && <Route path="/login" element={<Login />} />}
         {!isLoggedIn && <Route path="/register" element={<Register />} />}
         {!isLoggedIn && <Route path="/" element={<Register />} />}
