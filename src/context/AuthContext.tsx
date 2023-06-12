@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { AuthContextType, ChildProps } from "../types";
 import { useNavigate } from "react-router-dom";
+import { getChosenApps } from "../services/auth.service";
 
 const initialState: AuthContextType = {
   isLoggedIn: false,
@@ -15,7 +16,6 @@ const AuthContextProvider = ({ children }: ChildProps) => {
   useEffect(() => {
     const userFromStorage = localStorage.getItem("user") ?? "";
     if (userFromStorage === "") {
-      console.log("hi");
       logout();
     } else {
       const user = JSON.parse(userFromStorage);
@@ -24,6 +24,12 @@ const AuthContextProvider = ({ children }: ChildProps) => {
       const token = user.token;
       const email = user.email;
       const username = user.username;
+      /*      getChosenApps().then((res) => {
+        const arr = res.data.arr ?? [];
+        console.log(arr);
+        setShop(arr);
+        console.log(shop);
+      }); */
 
       login(username, email, token);
     }
@@ -47,7 +53,15 @@ const AuthContextProvider = ({ children }: ChildProps) => {
     setEmail(undefined);
     setUserName(undefined);
   };
-  const contextValues = { isLoggedIn, userName, token, email, login, logout };
+
+  const contextValues = {
+    isLoggedIn,
+    userName,
+    token,
+    email,
+    login,
+    logout,
+  };
 
   return (
     <AuthContext.Provider value={contextValues}>

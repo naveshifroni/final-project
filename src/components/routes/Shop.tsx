@@ -23,6 +23,7 @@ import {
 } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
 import { addApps, getChosenApps } from "../../services/auth.service";
+import { useNavigate } from "react-router-dom";
 
 const mockdata = [
   { title: "Facebook", icon: IconBrandFacebook, color: "blue", chosen: false },
@@ -76,15 +77,14 @@ const useStyles = createStyles((theme) => ({
 function Shop() {
   const { classes, theme } = useStyles();
   const [chosenApps, setChosenApps] = useState<string[]>([]);
-  const [id, setId] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     getChosenApps().then((res) => {
       console.log(res);
-      setId(res.data[0]._id ?? "");
-      console.log(id);
+      setChosenApps(res.data);
     });
-  }, [id]);
+  }, []);
 
   const addToCart = (name: string) => {
     const chosenIndex = chosenApps.findIndex((c: any) => c === name);
@@ -100,15 +100,17 @@ function Shop() {
     }
   };
   const checkout = () => {
-    addApps(chosenApps, id)
+    addApps(chosenApps)
       .then((res) => {
         console.log(res);
+        navigate("/shop");
       })
       .catch((e) => console.log(e));
   };
 
   const items = mockdata.map((item) => (
     <UnstyledButton
+      sx={chosenApps.includes(item.title) ? { background: "#f1f1f1" } : {}}
       key={item.title}
       className={classes.item}
       onClick={() => {
@@ -121,10 +123,14 @@ function Shop() {
       </Text>
 
       {!chosenApps.includes(item.title) && (
-        <Text size="xs" mt={3}>
-          {" "}
-          Add to cart{" "}
-        </Text>
+        <Button variant="light" size="xs" mt={3}>
+          Subscribe
+        </Button>
+      )}
+      {chosenApps.includes(item.title) && (
+        <Button variant="light" size="xs" mt={3}>
+          Unsubscribe
+        </Button>
       )}
     </UnstyledButton>
   ));

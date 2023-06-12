@@ -46,8 +46,8 @@ const updateAppSettings = (app: appSettingsType) => {
   });
 };
 
-const addApps = (apps: any, appsId: string) => {
-  return axios.post(baseUrl + "/add", { apps, appsId }).then((res) => {
+const addApps = (apps: any) => {
+  return axios.post(baseUrl + "/add", { apps }).then((res) => {
     return res;
   });
 };
