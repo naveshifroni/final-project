@@ -24,6 +24,7 @@ import { appSettingsType, appSettingsTypeGet } from "../../../types";
 import { mockdata } from "../dataForApp";
 import { IconBrandFacebook } from "@tabler/icons-react";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -58,6 +59,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 function MainApp() {
+  const navigate = useNavigate();
   const { classes, theme } = useStyles();
   const [opened, { open, close }] = useDisclosure(false);
   const [app, setApp] = useState({
@@ -71,24 +73,25 @@ function MainApp() {
   const [following, setFollowing] = useState(false);
   const [followers, setFollowers] = useState(false);
   const [appSettings, setAppSettings] = useState<appSettingsTypeGet[]>([]);
-  console.log(appSettings);
 
   const openSesemi = (item: any) => {
     setApp(item);
     const found = appSettings?.filter((e: any) => e.title === item.title);
     console.log(found);
-    setNoti(found[0].notifications);
-    setInbox(found[0].inbox);
-    setPublish(found[0].publish);
-    setFollowing(found[0].following);
-    setFollowers(found[0].followers);
+    setNoti(found[0]?.notifications ?? false);
+    setInbox(found[0]?.inbox ?? false);
+    setPublish(found[0]?.publish ?? false);
+    setFollowing(found[0]?.following ?? false);
+    setFollowers(found[0]?.followers ?? false);
     open();
   };
 
   useEffect(() => {
-    getAppsSettings().then((res: any) => {
-      setAppSettings(res.data);
-    });
+    getAppsSettings()
+      .then((res: any) => {
+        setAppSettings(res.data);
+      })
+      .catch((e) => console.log(e));
   }, []);
 
   const saveAppSettings = () => {
@@ -108,7 +111,13 @@ function MainApp() {
     item.followers = followers;
     updateAppSettings(item)
       .then((res) => {
+        navigate("/mainapp");
         close();
+        getAppsSettings()
+          .then((res: any) => {
+            setAppSettings(res.data);
+          })
+          .catch((e) => console.log(e));
         Swal.fire("Great", "Settings has been saved", "success");
       })
       .catch((e) => console.log(e));
