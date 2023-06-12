@@ -5,8 +5,8 @@ import { RegisterFormType } from "../../types";
 import * as Yup from "yup";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { ColorRing } from "react-loader-spinner";
-import authService, { login } from "../../services/auth.service";
-import { Box, Text, Flex, Grid, Select } from "@mantine/core";
+import authService from "../../services/auth.service";
+import { Box, Text, Grid, Select } from "@mantine/core";
 import Swal from "sweetalert2";
 
 const Register = () => {
