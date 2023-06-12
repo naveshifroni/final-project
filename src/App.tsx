@@ -8,7 +8,7 @@ import { Route, Routes } from "react-router-dom";
 import AuthContext from "./context/AuthContext";
 import { MainHeader, userLinks, mainlinks } from "./components/MainHeader";
 import { MainFooter, data } from "./components/MainFooter";
-import MainApp3 from "./components/routes/mainapp/MainApp3";
+import MainApp from "./components/routes/mainapp/MainApp";
 import Shop from "./components/routes/Shop";
 
 function App() {
@@ -26,7 +26,7 @@ function App() {
             <Route path="/shop" element={<Shop />} />
           </>
         )}
-        {admin && <Route path="/mainapp" element={<MainApp3 />} />}
+        {admin && <Route path="/mainapp" element={<MainApp />} />}
         {!isLoggedIn && <Route path="/login" element={<Login />} />}
         {!isLoggedIn && <Route path="/register" element={<Register />} />}
         {!isLoggedIn && <Route path="/" element={<Register />} />}

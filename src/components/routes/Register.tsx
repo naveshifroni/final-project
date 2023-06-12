@@ -130,8 +130,8 @@ const Register = () => {
             <Grid justify="center" mt="20px">
               <Grid.Col span={4}>
                 <Select
-                  label="Your favorite framework/library"
-                  placeholder="Pick one"
+                  label="Pick your your user role"
+                  placeholder="Pick role"
                   data={[
                     { value: "user", label: "User" },
                     { value: "moderator", label: "Moderator" },

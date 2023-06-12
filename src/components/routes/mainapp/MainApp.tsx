@@ -15,32 +15,12 @@ import {
   Button,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import {
-  IconBrandGmail,
-  IconBrandInstagram,
-  IconBrandYoutube,
-  IconBrandWhatsapp,
-  IconBrandSpotify,
-  IconBrandSkype,
-  IconBrandTwitter,
-  IconBrandFacebook,
-  IconBrandLinkedin,
-} from "@tabler/icons-react";
 import { useState } from "react";
 import { updateAppSettings } from "../../../services/auth.service";
 import { appSettingsType } from "../../../types";
-
-const mockdata = [
-  { title: "Facebook", icon: IconBrandFacebook, color: "blue" },
-  { title: "Gmail", icon: IconBrandGmail, color: "red" },
-  { title: "Insatagram", icon: IconBrandInstagram, color: "pink" },
-  { title: "Youtube", icon: IconBrandYoutube, color: "red" },
-  { title: "Whatsapp", icon: IconBrandWhatsapp, color: "green" },
-  { title: "Spotify", icon: IconBrandSpotify, color: "green" },
-  { title: "Linkden", icon: IconBrandLinkedin, color: "blue" },
-  { title: "Twitter", icon: IconBrandTwitter, color: "blue" },
-  { title: "Skype", icon: IconBrandSkype, color: "blue" },
-];
+import { mockdata } from "../dataForApp";
+import { IconBrandFacebook } from "@tabler/icons-react";
+import Swal from "sweetalert2";
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -74,7 +54,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-function MainApp3() {
+function MainApp() {
   const { classes, theme } = useStyles();
   const [opened, { open, close }] = useDisclosure(false);
   const [app, setApp] = useState({
@@ -89,7 +69,6 @@ function MainApp3() {
   const [followers, setFollowers] = useState(false);
 
   const openSesemi = (item: any) => {
-    console.log(item.title);
     setApp(item);
     open();
   };
@@ -110,7 +89,11 @@ function MainApp3() {
     item.following = following;
     item.followers = followers;
     updateAppSettings(item)
-      .then((res) => console.log(res))
+      .then((res) => {
+        console.log(res);
+        close();
+        Swal.fire("Great", "Settings has been saved", "success");
+      })
       .catch((e) => console.log(e));
   };
 
@@ -203,4 +186,4 @@ function MainApp3() {
   );
 }
 
-export default MainApp3;
+export default MainApp;
