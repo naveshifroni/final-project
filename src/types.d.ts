@@ -41,3 +41,13 @@ export type appSettingsType = {
   following: boolean;
   followers: boolean;
 };
+
+export type appSettingsTypeGet = {
+  _id: string;
+  title: string;
+  notifications: boolean;
+  inbox: boolean;
+  publish: boolean;
+  following: boolean;
+  followers: boolean;
+};

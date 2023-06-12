@@ -15,9 +15,12 @@ import {
   Button,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { useState } from "react";
-import { updateAppSettings } from "../../../services/auth.service";
-import { appSettingsType } from "../../../types";
+import { useState, useEffect } from "react";
+import {
+  updateAppSettings,
+  getAppsSettings,
+} from "../../../services/auth.service";
+import { appSettingsType, appSettingsTypeGet } from "../../../types";
 import { mockdata } from "../dataForApp";
 import { IconBrandFacebook } from "@tabler/icons-react";
 import Swal from "sweetalert2";
@@ -67,11 +70,26 @@ function MainApp() {
   const [publish, setPublish] = useState(false);
   const [following, setFollowing] = useState(false);
   const [followers, setFollowers] = useState(false);
+  const [appSettings, setAppSettings] = useState<appSettingsTypeGet[]>([]);
+  console.log(appSettings);
 
   const openSesemi = (item: any) => {
     setApp(item);
+    const found = appSettings?.filter((e: any) => e.title === item.title);
+    console.log(found);
+    setNoti(found[0].notifications);
+    setInbox(found[0].inbox);
+    setPublish(found[0].publish);
+    setFollowing(found[0].following);
+    setFollowers(found[0].followers);
     open();
   };
+
+  useEffect(() => {
+    getAppsSettings().then((res: any) => {
+      setAppSettings(res.data);
+    });
+  }, []);
 
   const saveAppSettings = () => {
     const item: appSettingsType = {

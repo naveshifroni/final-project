@@ -70,13 +70,25 @@ const getChosenApps = () => {
     return res;
   });
 };
-
+const getAppsSettings = () => {
+  return axios.get(baseUrl + "/app").then((res) => {
+    return res;
+  });
+};
 const logout = () => {
   localStorage.removeItem("token");
   localStorage.removeItem("user");
 };
 
-export { register, login, logout, updateAppSettings, addApps, getChosenApps };
+export {
+  register,
+  login,
+  logout,
+  updateAppSettings,
+  addApps,
+  getChosenApps,
+  getAppsSettings,
+};
 
 const authService = { register, login, logout };
 export default authService;
