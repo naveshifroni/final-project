@@ -13,7 +13,12 @@ export type AuthContextType = {
   username?: string;
   email?: string;
   token?: string;
-  login: (userName: string, email: string, token: string) => void;
+  login: (
+    userName: string,
+    email: string,
+    token: string,
+    isAdmin: boolean
+  ) => void;
   logout: () => void;
 };
 

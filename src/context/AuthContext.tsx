@@ -29,7 +29,7 @@ const AuthContextProvider = ({ children }: ChildProps) => {
       const email = user.email;
       const username = user.username;
 
-      login(username, email, token);
+      login(username, email, token, admin);
     }
   }, []);
 
@@ -39,11 +39,17 @@ const AuthContextProvider = ({ children }: ChildProps) => {
   const [email, setEmail] = useState<string | undefined>(undefined);
   const [token, setToken] = useState<string | undefined>(undefined);
 
-  const login = (userName: string, email: string, token: string) => {
+  const login = (
+    userName: string,
+    email: string,
+    token: string,
+    isAdmin: boolean
+  ) => {
     setIsLoggedIn(true);
     setEmail(email);
     setUserName(userName);
     setToken(token);
+    setAdmin(isAdmin);
   };
 
   const logout = () => {

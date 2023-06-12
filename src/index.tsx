@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { DarkModeContextProvider } from "./context/dark-mode-context";
+
 import { BrowserRouter } from "react-router-dom";
 import { AuthContextProvider } from "./context/AuthContext";
 import "bootstrap/dist/css/bootstrap.css";
@@ -15,9 +15,7 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <AuthContextProvider>
-        <DarkModeContextProvider>
-          <App />
-        </DarkModeContextProvider>
+        <App />
       </AuthContextProvider>
     </BrowserRouter>
   </React.StrictMode>

@@ -40,12 +40,18 @@ const Register = () => {
           const token = res.accessToken;
           const email = res.email;
           const username = res.username;
-          login(username, email, token);
+          const roleOfUser = res.roleId ?? "";
+          if (roleOfUser === "6475ae11f3de28d36990efcd") {
+            login(username, email, token, true);
+          } else {
+            login(username, email, token, false);
+          }
+
           nav("/");
         })
         .catch((e) => {
           console.log(e);
-          setErr(JSON.stringify(e.response.data));
+          setErr(JSON.stringify(e));
         })
         .finally(() => {
           setIsLoading(false);

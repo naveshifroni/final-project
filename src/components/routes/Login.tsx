@@ -34,8 +34,12 @@ const Login = () => {
         const token = res.accessToken;
         const email = res.email;
         const username = res.username;
+        if (res.roles[0] === "ROLE_ADMIN") {
+          login(username, email, token, true);
+        } else {
+          login(username, email, token, false);
+        }
 
-        login(username, email, token);
         //update context
 
         //login()

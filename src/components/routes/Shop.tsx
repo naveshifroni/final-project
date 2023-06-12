@@ -9,6 +9,7 @@ import {
   rem,
   Button,
   Flex,
+  Select,
 } from "@mantine/core";
 import {
   IconBrandGmail,
@@ -25,23 +26,7 @@ import { useEffect, useState } from "react";
 import { addApps, getChosenApps } from "../../services/auth.service";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-
-const mockdata = [
-  { title: "Facebook", icon: IconBrandFacebook, color: "blue", chosen: false },
-  { title: "Gmail", icon: IconBrandGmail, color: "red", chosen: false },
-  {
-    title: "Insatagram",
-    icon: IconBrandInstagram,
-    color: "pink",
-    chosen: false,
-  },
-  { title: "Youtube", icon: IconBrandYoutube, color: "red", chosen: false },
-  { title: "Whatsapp", icon: IconBrandWhatsapp, color: "green", chosen: false },
-  { title: "Spotify", icon: IconBrandSpotify, color: "green", chosen: false },
-  { title: "Linkden", icon: IconBrandLinkedin, color: "blue", chosen: false },
-  { title: "Twitter", icon: IconBrandTwitter, color: "blue", chosen: false },
-  { title: "Skype", icon: IconBrandSkype, color: "blue", chosen: false },
-];
+import { appList, mockdata } from "./dataForApp";
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -78,6 +63,7 @@ const useStyles = createStyles((theme) => ({
 function Shop() {
   const { classes, theme } = useStyles();
   const [chosenApps, setChosenApps] = useState<string[]>([]);
+  const [value, setValue] = useState<string | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -86,6 +72,16 @@ function Shop() {
       setChosenApps(res.data);
     });
   }, []);
+
+  const addAppToShop = () => {
+    const added = {
+      title: value ?? "",
+      icon: IconBrandLinkedin,
+      color: "blue",
+    };
+    mockdata.push(added);
+    navigate("/shop");
+  };
 
   const addToCart = (name: string) => {
     const chosenIndex = chosenApps.findIndex((c: any) => c === name);
@@ -158,6 +154,21 @@ function Shop() {
       <SimpleGrid cols={3} mt="md">
         {items}
       </SimpleGrid>
+      <Flex justify="center" mt="xl">
+        <Select
+          searchable
+          label="Search for an app to create and add"
+          placeholder="Tyoe to search"
+          data={appList}
+          value={value}
+          onChange={setValue}
+        />
+        <Button ml={10} mt={25} onClick={addAppToShop}>
+          {" "}
+          Add{" "}
+        </Button>
+      </Flex>
+
       <Flex justify="center" mt="xl">
         <Button ta="center" onClick={checkout}>
           {" "}
