@@ -11,17 +11,7 @@ import {
   Flex,
   Select,
 } from "@mantine/core";
-import {
-  IconBrandGmail,
-  IconBrandInstagram,
-  IconBrandYoutube,
-  IconBrandWhatsapp,
-  IconBrandSpotify,
-  IconBrandSkype,
-  IconBrandTwitter,
-  IconBrandFacebook,
-  IconBrandLinkedin,
-} from "@tabler/icons-react";
+import { IconApiApp } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
 import { addApps, getChosenApps } from "../../services/auth.service";
 import { useNavigate } from "react-router-dom";
@@ -76,7 +66,7 @@ function Shop() {
   const addAppToShop = () => {
     const added = {
       title: value ?? "",
-      icon: IconBrandLinkedin,
+      icon: IconApiApp,
       color: "blue",
     };
     mockdata.push(added);
@@ -148,7 +138,7 @@ function Shop() {
       <Group position="apart">
         <Text className={classes.title}>Services</Text>
         <Anchor size="xs" color="dimmed" sx={{ lineHeight: 1 }}>
-          + 21 other services
+          + 34 other services
         </Anchor>
       </Group>
       <SimpleGrid cols={3} mt="md">
