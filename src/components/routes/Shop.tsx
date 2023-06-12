@@ -58,7 +58,6 @@ function Shop() {
 
   useEffect(() => {
     getChosenApps().then((res) => {
-      console.log(res);
       setChosenApps(res.data);
     });
   }, []);
@@ -75,23 +74,22 @@ function Shop() {
 
   const addToCart = (name: string) => {
     const chosenIndex = chosenApps.findIndex((c: any) => c === name);
-    console.log(chosenIndex);
+
     if (chosenIndex === -1) {
       chosenApps.push(name);
       setChosenApps(chosenApps);
-      console.log(chosenApps);
+
       navigate("/shop");
     } else {
       chosenApps.splice(chosenIndex, 1);
       setChosenApps(chosenApps);
-      console.log(chosenApps);
+
       navigate("/shop");
     }
   };
   const checkout = () => {
     addApps(chosenApps)
       .then((res) => {
-        console.log(res);
         Swal.fire("Thanks", "For subscribing to GoToApp", "success");
         navigate("/shop");
       })

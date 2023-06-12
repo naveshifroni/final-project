@@ -30,7 +30,6 @@ const Login = () => {
     authService
       .login(email, password)
       .then((res) => {
-        console.log(res);
         const token = res.accessToken;
         const email = res.email;
         const username = res.username;

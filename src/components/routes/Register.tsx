@@ -15,7 +15,7 @@ const Register = () => {
   const [err, setErr] = useState<string | undefined>(undefined);
   const { isLoggedIn, login } = useContext(AuthContext);
   const [role, setRole] = useState<string | null>(null);
-  console.log(role);
+
   const initialValues: RegisterFormType = {
     username: "",
     email: "",
@@ -36,7 +36,6 @@ const Register = () => {
       authService
         .register(username, email, password, role ?? "")
         .then((res) => {
-          console.log(res);
           const token = res.accessToken;
           const email = res.email;
           const username = res.username;

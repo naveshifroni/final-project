@@ -90,7 +90,6 @@ function MainApp() {
     item.followers = followers;
     updateAppSettings(item)
       .then((res) => {
-        console.log(res);
         close();
         Swal.fire("Great", "Settings has been saved", "success");
       })
