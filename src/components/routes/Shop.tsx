@@ -24,6 +24,7 @@ import {
 import { useEffect, useState } from "react";
 import { addApps, getChosenApps } from "../../services/auth.service";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const mockdata = [
   { title: "Facebook", icon: IconBrandFacebook, color: "blue", chosen: false },
@@ -105,6 +106,7 @@ function Shop() {
     addApps(chosenApps)
       .then((res) => {
         console.log(res);
+        Swal.fire("Thanks", "For subscribing to GoToApp", "success");
         navigate("/shop");
       })
       .catch((e) => console.log(e));

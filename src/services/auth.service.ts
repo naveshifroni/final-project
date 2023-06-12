@@ -4,9 +4,14 @@ import { appSettingsType } from "../types";
 const baseUrl = "http://localhost:3001/api";
 const baseUrlAuth = "http://localhost:3001/api/auth";
 
-const register = (username: string, email: string, password: string) => {
+const register = (
+  username: string,
+  email: string,
+  password: string,
+  role: string
+) => {
   return axios
-    .post(baseUrlAuth + "/signup", { username, email, password })
+    .post(baseUrlAuth + "/signup", { username, email, password, role })
     .then((res) => {
       const token = res.data.accessToken;
       const email = res.data.email;

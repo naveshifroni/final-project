@@ -6,14 +6,16 @@ import * as Yup from "yup";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { ColorRing } from "react-loader-spinner";
 import authService, { login } from "../../services/auth.service";
-import { Box, Text, Flex, Grid } from "@mantine/core";
+import { Box, Text, Flex, Grid, Select } from "@mantine/core";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const nav = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [err, setErr] = useState<string | undefined>(undefined);
   const { isLoggedIn, login } = useContext(AuthContext);
-
+  const [role, setRole] = useState<string | null>(null);
+  console.log(role);
   const initialValues: RegisterFormType = {
     username: "",
     email: "",
@@ -26,26 +28,29 @@ const Register = () => {
   });
 
   const handleRegister = (formValues: RegisterFormType) => {
-    setIsLoading(true);
     const { username, email, password } = formValues;
-
-    authService
-      .register(username, email, password)
-      .then((res) => {
-        console.log(res);
-        const token = res.accessToken;
-        const email = res.email;
-        const username = res.username;
-        login(username, email, token);
-        nav("/");
-      })
-      .catch((e) => {
-        console.log(e);
-        setErr(JSON.stringify(e.response.data));
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    if (role === null) {
+      Swal.fire("Please pick a role");
+    } else {
+      setIsLoading(true);
+      authService
+        .register(username, email, password, role ?? "")
+        .then((res) => {
+          console.log(res);
+          const token = res.accessToken;
+          const email = res.email;
+          const username = res.username;
+          login(username, email, token);
+          nav("/");
+        })
+        .catch((e) => {
+          console.log(e);
+          setErr(JSON.stringify(e.response.data));
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }
   };
 
   if (isLoggedIn) {
@@ -117,6 +122,19 @@ const Register = () => {
               />
             </div>
             <Grid justify="center" mt="20px">
+              <Grid.Col span={4}>
+                <Select
+                  label="Your favorite framework/library"
+                  placeholder="Pick one"
+                  data={[
+                    { value: "user", label: "User" },
+                    { value: "moderator", label: "Moderator" },
+                    { value: "admin", label: "Admin" },
+                  ]}
+                  value={role}
+                  onChange={setRole}
+                />
+              </Grid.Col>
               <Grid.Col span={12} sx={{ textAlign: "center" }}>
                 <button
                   disabled={isLoading}
