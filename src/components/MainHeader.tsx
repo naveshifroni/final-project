@@ -129,13 +129,14 @@ export const userLinks: LinkProps[] = [
 ];
 
 export function MainHeader({ mainLinks, userLinks }: DoubleHeaderProps) {
-  const { isLoggedIn, logout } = useContext(AuthContext);
+  const { isLoggedIn, logout, admin } = useContext(AuthContext);
   const [opened, { toggle }] = useDisclosure(false);
   const { classes, cx } = useStyles();
   const [active, setActive] = useState(0);
   const nav = useNavigate();
 
   const signOut = () => {
+    localStorage.removeItem("admin");
     authService.logout();
     logout();
     nav("/register");
@@ -143,6 +144,7 @@ export function MainHeader({ mainLinks, userLinks }: DoubleHeaderProps) {
 
   const mainItems = mainLinks.map((item, index) => (
     <Anchor<"a">
+      sx={!admin && item.label === "App" ? { display: "none" } : {}}
       key={item.label}
       className={cx(classes.mainLink, {
         [classes.mainLinkActive]: index === active,
@@ -159,6 +161,7 @@ export function MainHeader({ mainLinks, userLinks }: DoubleHeaderProps) {
 
   const secondaryItems = userLinks.map((item) => (
     <Anchor<"a">
+      sx={!admin && item.label === "App" ? { display: "none" } : {}}
       href={item.link}
       key={item.label}
       onClick={(event) => {

@@ -120,19 +120,20 @@ function Shop() {
       onClick={() => {
         addToCart(item.title);
       }}
+      p={6}
     >
       <item.icon color={theme.colors[item.color][6]} size="2rem" />
-      <Text size="sm" mt={7}>
+      <Text size="sm" m={7}>
         {item.title}
       </Text>
 
       {!chosenApps.includes(item.title) && (
-        <Button variant="light" size="xs" mt={3}>
+        <Button variant="light" size="xs" m={3}>
           Subscribe
         </Button>
       )}
       {chosenApps.includes(item.title) && (
-        <Button variant="light" size="xs" mt={3}>
+        <Button variant="light" size="xs" m={3}>
           Unsubscribe
         </Button>
       )}

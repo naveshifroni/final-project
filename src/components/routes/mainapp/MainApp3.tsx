@@ -121,11 +121,17 @@ function MainApp3() {
         onClick={() => {
           openSesemi(item);
         }}
+        m={4}
+        p={9}
       >
         <item.icon color={theme.colors[item.color][6]} size="2rem" />
-        <Text size="xs" mt={7}>
+        <Text size="xs" mt={7} mb={4}>
           {item.title}
         </Text>
+        <Button variant="light" fz="xs" mb={3}>
+          {" "}
+          Click to change settings{" "}
+        </Button>
       </UnstyledButton>
     </>
   ));
